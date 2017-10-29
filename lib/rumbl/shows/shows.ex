@@ -115,4 +115,21 @@ defmodule Rumbl.Shows do
       |> Ecto.assoc(:videos)
       |> Repo.get!(id)
   end
+
+  def alphabetical(query, name \\ "name") do
+    from c in query, order_by: c.name
+  end
+
+  def names_and_ids(query) do
+    from c in query, select: {c.name, c.id}
+  end
 end
+
+
+
+
+
+
+
+
+

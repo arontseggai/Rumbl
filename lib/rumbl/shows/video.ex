@@ -9,14 +9,20 @@ defmodule Rumbl.Shows.Video do
     field :title, :string
     field :url, :string
     belongs_to :user, Rumbl.Accounts.User
+    belongs_to :category, Rumbl.Shows.Category
 
     timestamps()
   end
 
-  @doc false
+
+  @required_fields ~w(url title description)a
+  @optional_fields ~w(category_id)a
+
   def changeset(%Video{} = video, attrs) do
     video
-    |> cast(attrs, [:url, :title, :description])
-    |> validate_required([:url, :title, :description])
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> assoc_constraint(:category, [message: "this category is not valid"])
+    # |> foreign_key_constraint(:category, [message: "this category is not valid"])
+    |> validate_required(@required_fields)
   end
 end
