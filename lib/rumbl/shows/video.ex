@@ -9,8 +9,10 @@ defmodule Rumbl.Shows.Video do
     field :title, :string
     field :url, :string
     field :slug, :string
+
     belongs_to :user, Rumbl.Accounts.User
     belongs_to :category, Rumbl.Shows.Category
+    has_many :annotations, Rumbl.Commenting.Annotation
 
     timestamps()
   end
