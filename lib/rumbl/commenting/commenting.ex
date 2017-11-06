@@ -10,9 +10,10 @@ defmodule Rumbl.Commenting do
       |> Repo.insert()
   end
 
-  def get_annotations(video) do
+  def get_annotations(video, last_seen_id) do
     Repo.all(
       from a in Ecto.assoc(video, :annotations),
+      where: a.id > ^last_seen_id,
       order_by: [asc: a.at, asc: a.id],
       limit: 200,
       preload: [:user]
