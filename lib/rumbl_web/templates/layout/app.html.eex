@@ -16,6 +16,7 @@
       <div class="header">
         <ol class="breadcrumb text-right">
           <%= if @current_user do %>
+            <li><%= link "Home", to: "/" %></li>
             <li><%= @current_user.username %></li>
             <li><%= link "My Videos", to: video_path(@conn, :index) %></li>
             <li>
