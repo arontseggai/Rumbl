@@ -1,4 +1,23 @@
 <div class="jumbotron">
   <h2>Welcome to Rumbl.io!</h2>
-  <p class=​"lead"​>Rumble out loud.</p>
+  <p class=​"lead"​>Check, annotate and add videos</p>
 </div>
+
+<div class="row">
+  <%= for video <- @videos do %>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <%= img_tag("https://img.youtube.com/vi/#{player_id(video)}/hqdefault.jpg") %>
+        <div class="caption">
+          <h4><%= video.title %></h4>
+          <div style="overflow: hidden; height: 65px;">
+            <p><%= truncate_description(video.description) %></p>
+          </div>
+          <p><%= link "Watch", to: watch_path(@conn, :show, video), class: "btn btn-primary" %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
